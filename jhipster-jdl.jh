@@ -17,10 +17,33 @@ name String,
 city String,
 fundate LocalDate
 }
+entity FavouritePlayer{
+liked Boolean,
+timestamp ZonedDateTime
 
+}
+
+entity Game{
+LocalPoints Integer,
+VisitorPoints Integer,
+timeStart ZonedDateTime,
+timeFinish ZonedDateTime
+
+}
+entity GameValorationUser{
+rating Integer,
+timestamp ZonedDateTime
+}
 relationship ManyToOne {
 	Player{team(name)} to Team{player}
 }
-
+relationship ManyToOne {
+	Game{gameLocalTeam(name)} to Team{gameLocalTeam},
+    Game{gameVisitorTeam(name)} to Team{gameVisitorTeam}
+}
+relationship ManyToOne{
+FavouritePlayer{user(login)} to User,
+FavouritePlayer{player(name)} to Player{FavouritePlayer}
+}
 
 paginate Team, Player with infinite-scroll

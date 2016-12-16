@@ -28,7 +28,6 @@ spring:
         name:
         username: root
         password:
-
         hikari:
             data-source-properties:
                 cachePrepStmts: true
